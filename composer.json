@@ -1,0 +1,25 @@
+{
+  "name": "dmr/rest-paginator-bundle",
+  "type": "library",
+  "description": "Support for paged collections Symfony 3",
+  "keywords": [],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dmitrii Petelin",
+      "email": "petelindv@gmail.vom"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "symfony/framework-bundle": "~3.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.0.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "DMR\\Bundle\\RestPaginatorBundle\\": ""
+    }
+  }
+}
