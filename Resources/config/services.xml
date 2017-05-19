@@ -24,7 +24,7 @@
 
         <service id="dmr_paginator.paginator_factory.doctrine_orm"
                  class="DMR\Bundle\PaginatorBundle\Factory\DoctrineOrmPaginatorFactory" public="false">
-            <tag name="dmr_paginator.paginator_factory" class_name="Doctrine\ORM\QueryBuilder\QueryBuilder"/>
+            <tag name="dmr_paginator.paginator_factory" class_name="Doctrine\ORM\QueryBuilder"/>
         </service>
     </services>
 
