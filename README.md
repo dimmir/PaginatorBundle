@@ -1,2 +1,2 @@
-# RestPaginatorBundle
+# PaginatorBundle
 Support for paged collections.

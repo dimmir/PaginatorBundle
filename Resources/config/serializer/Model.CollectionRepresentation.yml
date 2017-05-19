@@ -1,0 +1,7 @@
+DMR\\Bundle\\PaginatorBundle\\Representation\\CollectionRepresentation:
+  exclusion_policy: ALL
+  virtual_properties:
+    getItems:
+      serialized_name: items
+    getPagination:
+      serialized_name: pagination

@@ -1,0 +1,9 @@
+DMR\\Bundle\\PaginatorBundle\\Representation\\SliderRepresentation:
+  exclusion_policy: ALL
+  virtual_properties:
+    getItems:
+      serialized_name: items
+    getPreviusPage:
+      serialized_name: previus
+    getNextPage:
+      serialized_name: next

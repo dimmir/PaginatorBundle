@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="dmr_paginator.request_resolver" class="DMR\Bundle\PaginatorBundle\Pagination\RequestResolver"
+                 public="false">
+            <argument>%dmr_paginator.default_items_per_page%</argument>
+            <argument>%dmr_paginator.max_items_per_page%</argument>
+            <argument>%dmr_paginator.client_items_per_page%</argument>
+            <argument>%dmr_paginator.page_request_parameter_name%</argument>
+            <argument>%dmr_paginator.items_per_page_request_parameter_name%</argument>
+            <argument>%dmr_paginator.options%</argument>
+        </service>
+
+        <service id="dmr_paginator.service" class="DMR\Bundle\PaginatorBundle\Pagination\PaginationService">
+            <argument type="collection"/> <!-- factories -->
+            <argument type="service" id="dmr_paginator.request_resolver"/>
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="dmr_paginator.paginator_factory.doctrine_orm"
+                 class="DMR\Bundle\PaginatorBundle\Factory\DoctrineOrmPaginatorFactory" public="false">
+            <tag name="dmr_paginator.paginator_factory" class_name="Doctrine\ORM\QueryBuilder\QueryBuilder"/>
+        </service>
+    </services>
+
+</container>
