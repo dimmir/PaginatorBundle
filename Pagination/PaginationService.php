@@ -36,7 +36,7 @@ class PaginationService
 
     /**
      * PaginationService constructor.
-     * @param PaginatorFactoryInterface[] $paginatorFactoriess
+     * @param PaginatorFactoryInterface[] $paginatorFactories
      * @param RequestResolver $requestResolver
      * @param RequestStack $requestStack
      * @param EventDispatcherInterface $eventDispatcher

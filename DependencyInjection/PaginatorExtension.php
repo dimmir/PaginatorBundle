@@ -9,9 +9,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class PaginatorExtension extends Extension
 {
-    /**
-     * {@inheritDoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration, $configs);
@@ -19,14 +16,14 @@ class PaginatorExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        $this->remapParameters($config, $container, array(
+        $this->remapParameters($config, $container, [
             'items_per_page' => 'dmr_paginator.default_items_per_page',
             'max_items_per_page' => 'dmr_paginator.max_items_per_page',
             'page_request_parameter_name' => 'dmr_paginator.page_request_parameter_name',
             'items_per_page_request_parameter_name' => 'dmr_paginator.items_per_page_request_parameter_name',
             'client_items_per_page' => 'dmr_paginator.client_items_per_page',
             'options' => 'dmr_paginator.options',
-        ));
+        ]);
     }
 
     /**

@@ -22,18 +22,18 @@ class Configuration implements ConfigurationInterface
 
         $root
             ->children()
-            ->integerNode('items_per_page')->defaultValue(25)->end()
-            ->integerNode('max_items_per_page')->defaultNull()->info('The maximum number of items per page.')->end()
-            ->scalarNode('page_request_parameter_name')->defaultValue('page')->cannotBeEmpty()->end()
-            ->booleanNode('client_items_per_page')->defaultFalse()->info('To allow the client to set the number of items per page.')->end()
-            ->scalarNode('items_per_page_request_parameter_name')->defaultValue('itemsPerPage')->cannotBeEmpty()->end()
-            ->children()
-            ->arrayNode('options')
-            ->children()
-            ->scalarNode('orm_fetch_join_collection')->end()
-            ->end()
-            ->end()
-            ->end()
+                ->integerNode('items_per_page')->defaultValue(25)->end()
+                ->integerNode('max_items_per_page')->defaultNull()->info('The maximum number of items per page.')->end()
+                ->scalarNode('page_request_parameter_name')->defaultValue('page')->cannotBeEmpty()->end()
+                ->booleanNode('client_items_per_page')->defaultFalse()->info('To allow the client to set the number of items per page.')->end()
+                ->scalarNode('items_per_page_request_parameter_name')->defaultValue('itemsPerPage')->cannotBeEmpty()->end()
+                ->children()
+                    ->arrayNode('options')
+                        ->children()
+                            ->scalarNode('orm_fetch_join_collection')->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
