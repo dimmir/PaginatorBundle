@@ -26,7 +26,7 @@ class DoctrineOrmPaginatorFactory implements PaginatorFactoryInterface
             ->setFirstResult(($requestParameters->getCurrentPage() - 1) * $requestParameters->getItemsPerPage())
             ->setMaxResults($requestParameters->getItemsPerPage());
 
-        $doctrinePaginator = new Paginator($target, $requestParameters->getOption('fetchJoinCollection') ?: true);
+        $doctrinePaginator = new Paginator($target, $requestParameters->getOption('fetch_join_collection') ?: true);
 
         return new DoctrineOrmPaginator($doctrinePaginator);
     }

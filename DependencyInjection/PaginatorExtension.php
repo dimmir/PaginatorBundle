@@ -3,7 +3,7 @@
 namespace DMR\Bundle\PaginatorBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
@@ -13,8 +13,8 @@ class PaginatorExtension extends Extension
     {
         $config = $this->processConfiguration(new Configuration, $configs);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.xml');
 
         $this->remapParameters($config, $container, [
             'items_per_page' => 'dmr_paginator.default_items_per_page',
@@ -38,7 +38,7 @@ class PaginatorExtension extends Extension
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
         foreach ($map as $name => $paramName) {
-            if (isset($config[$name])) {
+            if (key_exists($name, $config)) {
                 $container->setParameter($paramName, $config[$name]);
                 continue;
             }
