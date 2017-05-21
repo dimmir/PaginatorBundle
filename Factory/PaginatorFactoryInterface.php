@@ -9,10 +9,11 @@ interface PaginatorFactoryInterface
 {
     /**
      * @param $target
-     * @param RequestParameters $config
+     * @param RequestParameters $requestParameters
+     * @param array $options
      * @return PaginatorInterface
      */
-    public function create($target, RequestParameters $requestParameters): PaginatorInterface;
+    public function create($target, RequestParameters $requestParameters, array $options = []): PaginatorInterface;
 
     /**
      * return name of class for target

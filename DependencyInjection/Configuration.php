@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('options')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->booleanNode('fetch_join_collection')->defaultFalse()->end()
+                        ->booleanNode('fetch_join_collection')->defaultTrue()->end()
                     ->end()
                 ->end()
             ->end();

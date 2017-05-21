@@ -27,6 +27,11 @@ class CollectionRepresentation
 
     public function getPagination()
     {
-        return $this->paginator;
+        return [
+            'page' => $this->paginator->getCountPages(),
+            'itemsPerPage' => $this->paginator->getNumberItemsPerPage(),
+            'totalItemsCount' => $this->paginator->getCountItems(),
+            'pagesCount' => $this->paginator->getCountPages(),
+        ];
     }
 }

@@ -15,21 +15,14 @@ class RequestParameters
     protected $itemsPerPage;
 
     /**
-     * @var array
-     */
-    protected $options = [];
-
-    /**
      * RequestParameters constructor.
      * @param int $currentPage
      * @param int $itemsPerPage
-     * @param array $options
      */
-    public function __construct(int $currentPage, int $itemsPerPage, array $options = [])
+    public function __construct(int $currentPage, int $itemsPerPage)
     {
         $this->currentPage = $currentPage;
         $this->itemsPerPage = $itemsPerPage;
-        $this->options = $options;
     }
 
     /**
@@ -70,47 +63,5 @@ class RequestParameters
         $this->itemsPerPage = $itemsPerPage;
 
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getOptions(): array
-    {
-        return $this->options;
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return $this
-     */
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
-
-        return $this;
-    }
-
-    /**
-     * @param $key
-     * @param $value
-     * @return $this
-     * @throws \LogicException
-     */
-    public function addOption($key, $value)
-    {
-        if (isset($this->options[$key])) {
-            new \LogicException('Option already exist');
-        }
-
-        $this->options[$key] = $value;
-
-        return $this;
-    }
-
-    public function getOption($key)
-    {
-        return $this->options[$key] ?? null;
     }
 }

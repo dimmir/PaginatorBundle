@@ -24,6 +24,11 @@ class PaginationEvent extends Event
     protected $paginator;
 
     /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
      * @return mixed
      */
     public function getTarget()
@@ -81,5 +86,47 @@ class PaginationEvent extends Event
         $this->paginator = $paginator;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return $this
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return $this
+     * @throws \LogicException
+     */
+    public function addOption($key, $value)
+    {
+        if (isset($this->options[$key])) {
+            new \LogicException('Option already exist');
+        }
+
+        $this->options[$key] = $value;
+
+        return $this;
+    }
+
+    public function getOption($key)
+    {
+        return $this->options[$key] ?? null;
     }
 }

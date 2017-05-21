@@ -35,38 +35,52 @@ class PaginationService
     protected $eventDispatcher;
 
     /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
      * PaginationService constructor.
      * @param PaginatorFactoryInterface[] $paginatorFactories
      * @param RequestResolver $requestResolver
      * @param RequestStack $requestStack
      * @param EventDispatcherInterface $eventDispatcher
+     * @param array $options
      */
-    public function __construct(array $paginatorFactories, RequestResolver $requestResolver, RequestStack $requestStack, EventDispatcherInterface $eventDispatcher)
+    public function __construct(array $paginatorFactories, RequestResolver $requestResolver, RequestStack $requestStack, EventDispatcherInterface $eventDispatcher, array $options = [])
     {
         $this->paginatorFactories = $paginatorFactories;
         $this->requestResolver = $requestResolver;
         $this->requestStack = $requestStack;
         $this->eventDispatcher = $eventDispatcher;
+        $this->options = $options;
     }
 
 
     /**
      * @param $target
+     * @param null $requestParameters
+     * @param array $options
      * @return PaginatorInterface
      */
-    public function pagination($target, $requestParameters = null)
+    public function pagination($target, $requestParameters = null, array $options = [])
     {
         $requestParameters = $requestParameters ?: $this->createRequestParameters();
 
         $paginationEvent = new PaginationEvent();
         $paginationEvent->setTarget($target)
-            ->setRequestParameters($requestParameters);
+            ->setRequestParameters($requestParameters)
+            ->setOptions(array_merge($this->options, $options));
 
         $this->eventDispatcher->dispatch(Events::PAGINATOR_BEFORE_PAGINATION, $paginationEvent);
 
         return $paginationEvent->getPaginator() instanceof PaginatorInterface
             ? $paginationEvent->getPaginator()
-            : $this->createPaginator($paginationEvent->getTarget(), $paginationEvent->getRequestParameters());
+            : $this->createPaginator(
+                $paginationEvent->getTarget(),
+                $paginationEvent->getRequestParameters(),
+                $paginationEvent->getOptions()
+            );
     }
 
     /**
@@ -85,21 +99,22 @@ class PaginationService
     /**
      * @param $target
      * @param RequestParameters $requestParameters
+     * @param array $options
      * @return PaginatorInterface
      */
-    private function createPaginator($target, RequestParameters $requestParameters)
+    private function createPaginator($target, RequestParameters $requestParameters, array $options = [])
     {
-        foreach ($this->paginatorFactories as $className => $facory) {
+        foreach ($this->paginatorFactories as $className => $factory) {
             if ($target instanceof $className) {
-                $currentFacory = $facory;
+                $currentFactory = $factory;
                 break;
             }
         }
 
-        if (empty($currentFacory) || !($currentFacory instanceof PaginatorFactoryInterface)) {
+        if (empty($currentFactory) || !($currentFactory instanceof PaginatorFactoryInterface)) {
             throw new RuntimeException(sprintf('For the object of %s class there is no Paginator', get_class($target)));
         }
 
-        return $currentFacory->create($target, $requestParameters);
+        return $currentFactory->create($target, $requestParameters, $options);
     }
 }

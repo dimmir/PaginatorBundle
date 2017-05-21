@@ -1,4 +1,4 @@
-DMR\\Bundle\\PaginatorBundle\\Representation\\SliderRepresentation:
+DMR\Bundle\PaginatorBundle\Representation\SliderRepresentation:
   exclusion_policy: ALL
   virtual_properties:
     getItems:

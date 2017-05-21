@@ -14,9 +14,10 @@ class DoctrineOrmPaginatorFactory implements PaginatorFactoryInterface
     /**
      * @param QueryBuilder $target
      * @param RequestParameters $requestParameters
+     * @param array $options
      * @return PaginatorInterface
      */
-    public function create($target, RequestParameters $requestParameters): PaginatorInterface
+    public function create($target, RequestParameters $requestParameters, array $options = []): PaginatorInterface
     {
         if (empty($requestParameters->getCurrentPage()) || empty($requestParameters->getItemsPerPage())) {
             throw new RuntimeException('CurrentPage or ItemsPerPage parameters are empty for RequestParameters instance');
@@ -26,7 +27,7 @@ class DoctrineOrmPaginatorFactory implements PaginatorFactoryInterface
             ->setFirstResult(($requestParameters->getCurrentPage() - 1) * $requestParameters->getItemsPerPage())
             ->setMaxResults($requestParameters->getItemsPerPage());
 
-        $doctrinePaginator = new Paginator($target, $requestParameters->getOption('fetch_join_collection') ?: true);
+        $doctrinePaginator = new Paginator($target, $options['fetch_join_collection'] ?? true);
 
         return new DoctrineOrmPaginator($doctrinePaginator);
     }
