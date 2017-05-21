@@ -2,7 +2,7 @@
   "name": "dmr/paginator-bundle",
   "type": "library",
   "description": "Support for paged collections Symfony 3",
-  "keywords": [],
+  "keywords": ["pagination", "rest", "api", "rest pagination", "pager", "page"],
   "license": "MIT",
   "authors": [
     {

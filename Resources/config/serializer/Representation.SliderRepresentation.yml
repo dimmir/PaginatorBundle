@@ -2,8 +2,11 @@ DMR\Bundle\PaginatorBundle\Representation\SliderRepresentation:
   exclusion_policy: ALL
   virtual_properties:
     getItems:
+      type: array
       serialized_name: items
     getPreviusPage:
+      type: integer
       serialized_name: previus
     getNextPage:
+      type: integer
       serialized_name: next
