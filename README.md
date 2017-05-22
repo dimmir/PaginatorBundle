@@ -56,10 +56,10 @@ Example for used with FOSRestBundle:
      */
     public function cgetAction (Request $request)
     {
-        $queryBuolder = $this->getDoctrine()->getManager()
-            ->getRepository('AppBundle:User')->createQueryBuilder('u');
+        $queryBuilder = $this->getDoctrine()->getManager()
+                    ->getRepository('AppBundle:User')->createQueryBuilder('u');
 
-        $paginator = $this->get('dmr_paginator.service')->pagination($queryBuolder);
+        $paginator = $this->get('dmr_paginator.service')->pagination($queryBuilder);
 
         return new SliderRepresentation($paginator);
     }
