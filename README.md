@@ -9,7 +9,7 @@ It easy used with FOSRestBundle
 You can install this bundle using composer:
 
 ```sh
-composer require dmr/paginator-bundle
+composer require dimmir/paginator-bundle
 ```
 
 Add the bundle to your AppKernel.php file:
