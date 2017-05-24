@@ -2,6 +2,7 @@
 
 namespace DMR\Bundle\PaginatorBundle\Tests\Pagination;
 
+use DMR\Bundle\PaginatorBundle\Exception\RuntimeException;
 use DMR\Bundle\PaginatorBundle\Factory\DoctrineOrmPaginatorFactory;
 use DMR\Bundle\PaginatorBundle\Pagination\PaginationService;
 use DMR\Bundle\PaginatorBundle\Pagination\RequestResolver;
@@ -44,6 +45,27 @@ class PaginationServiceTest extends TestCase
         $this->assertInstanceOf(DoctrineOrmPaginator::class, $paginator);
         $this->assertEquals($currentPage, $paginator->getCurrentPage());
         $this->assertEquals($defaultItemsPerPage, $paginator->getNumberItemsPerPage());
+    }
+
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testEmptyCurrentRequest()
+    {
+        $factory = new DoctrineOrmPaginatorFactory();
+        $requestResolver =  $this->prophesize(RequestResolver::class);
+        $requestStack = $this->prophesize(RequestStack::class);
+        $eventDispatcher = $this->prophesize(EventDispatcher::class);
+        $queryBuilder = $this->prophesize(QueryBuilder::class);
+
+        $paginator = new PaginationService(
+            [$factory->getTargetClass() => $factory],
+            $requestResolver->reveal(),
+            $requestStack->reveal(),
+            $eventDispatcher->reveal()
+        );
+
+        $paginator->pagination($queryBuilder->reveal());
     }
 
     protected function getPaginationService($defaultItemsPerPage, $maxItemsPerPage, $clientItemsPerPageEnabled, $currentPage)

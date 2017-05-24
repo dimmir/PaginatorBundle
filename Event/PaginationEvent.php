@@ -2,6 +2,7 @@
 
 namespace DMR\Bundle\PaginatorBundle\Event;
 
+use DMR\Bundle\PaginatorBundle\Exception\RuntimeException;
 use DMR\Bundle\PaginatorBundle\Pagination\RequestParameters;
 use DMR\Bundle\PaginatorBundle\Paginator\PaginatorInterface;
 use Symfony\Component\EventDispatcher\Event;
@@ -112,12 +113,12 @@ class PaginationEvent extends Event
      * @param $key
      * @param $value
      * @return $this
-     * @throws \LogicException
+     * @throws RuntimeException
      */
     public function addOption($key, $value)
     {
         if (isset($this->options[$key])) {
-            new \LogicException('Option already exist');
+            throw new RuntimeException('Option already exist');
         }
 
         $this->options[$key] = $value;

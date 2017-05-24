@@ -20,24 +20,7 @@ class DoctrineOrmPaginatorTest extends TestCase
         $this->assertEquals($pagesCount, $paginator->getCountPages());
         $this->assertEquals($itemsCount, $paginator->getCountItems());
         $this->assertEquals($maxResults, $paginator->getNumberItemsPerPage());
-    }
-
-    protected function getPaginator($firstResult, $maxResults, $countItems)
-    {
-        $query = $this->prophesize(Query::class);
-        $query->getFirstResult()->willReturn($firstResult)->shouldBeCalled();
-        $query->getMaxResults()->willReturn($maxResults)->shouldBeCalled();
-
-        $doctrinePaginator = $this->prophesize(Paginator::class);
-
-        $doctrinePaginator->getQuery()->willReturn($query->reveal())->shouldBeCalled();
-        $doctrinePaginator->count()->willReturn($countItems)->shouldBeCalled();
-
-        $doctrinePaginator->getIterator()->will(function () {
-            return new \ArrayIterator();
-        });
-
-        return new DoctrineOrmPaginator($doctrinePaginator->reveal());
+        $this->assertCount($maxResults, $paginator);
     }
 
     public function testIterator()
@@ -59,5 +42,23 @@ class DoctrineOrmPaginatorTest extends TestCase
             'First of three pages' => [0, 25, 55, 1, 3],
             'Second of two pages' => [20, 20, 40, 2, 2],
         ];
+    }
+
+    protected function getPaginator($firstResult, $maxResults, $countItems)
+    {
+        $query = $this->prophesize(Query::class);
+        $query->getFirstResult()->willReturn($firstResult)->shouldBeCalled();
+        $query->getMaxResults()->willReturn($maxResults)->shouldBeCalled();
+
+        $doctrinePaginator = $this->prophesize(Paginator::class);
+
+        $doctrinePaginator->getQuery()->willReturn($query->reveal())->shouldBeCalled();
+        $doctrinePaginator->count()->willReturn($countItems)->shouldBeCalled();
+
+        $doctrinePaginator->getIterator()->will(function () use ($maxResults) {
+            return new \ArrayIterator(array_fill(0, $maxResults, []));
+        });
+
+        return new DoctrineOrmPaginator($doctrinePaginator->reveal());
     }
 }

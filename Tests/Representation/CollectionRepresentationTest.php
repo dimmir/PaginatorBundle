@@ -14,7 +14,11 @@ class CollectionRepresentationTest extends TestCase
         $representation = new CollectionRepresentation($this->getPaginator());
 
         $this->assertInstanceOf('\ArrayIterator', $representation->getItems());
-        $this->assertInstanceOf(PaginatorInterface::class, $representation->getPagination());
+        $this->assertInternalType('array', $representation->getPagination());
+        $this->assertArrayHasKey('page', $representation->getPagination());
+        $this->assertArrayHasKey('itemsPerPage', $representation->getPagination());
+        $this->assertArrayHasKey('totalItemsCount', $representation->getPagination());
+        $this->assertArrayHasKey('pagesCount', $representation->getPagination());
     }
 
     protected function getPaginator($currentPage = 1, $itemsPerPage = 25, $countItems = 40, $countPages = 2)

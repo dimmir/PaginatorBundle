@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="./tests/bootstrap.php"
+<phpunit bootstrap="./Tests/bootstrap.php"
          colors="true">
     <testsuites>
         <testsuite>
-            <directory>tests</directory>
+            <directory>Tests</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">src</directory>
+            <directory>Paginator</directory>
+            <directory>Pagination</directory>
+            <directory>Factory</directory>
+            <directory>Representation</directory>
+            <directory>Event</directory>
             <exclude>
-                <directory suffix="Interface.php">src/</directory>
+                <directory suffix="Interface.php">.</directory>
             </exclude>
         </whitelist>
     </filter>

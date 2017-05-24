@@ -74,9 +74,7 @@ DMR\Bundle\PaginatorBundle\Representation\CollectionRepresentation:
   "items": [
     {
       "id": 1,
-      ...
     },
-    ...
   ],
   "pagination": {
     "page": 1,
@@ -94,9 +92,7 @@ DMR\Bundle\PaginatorBundle\Representation\SliderRepresentation:
   "items": [
     {
       "id": 1,
-      ...
     },
-    ...
   ],
   "previus": 1,
   "next": 3
