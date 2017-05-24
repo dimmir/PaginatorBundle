@@ -4,9 +4,7 @@ Flexible pagination bundle for Symfony 3.
 This bundle provides an easy way to add pagination support to the collection of your API.
 It easy used with FOSRestBundle
 
-[![Build Status](https://travis-ci.org/dimmir/PaginatorBundle.svg?branch=master)](https://travis-ci.org/dimmir/PaginatorBundle)
-
-[![Dependency Status](https://www.versioneye.com/user/projects/5924edc085cd28003240f45f/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5924edc085cd28003240f45f)
+[![Build Status](https://travis-ci.org/dimmir/PaginatorBundle.svg?branch=master)](https://travis-ci.org/dimmir/PaginatorBundle) [![Coverage Status](https://coveralls.io/repos/github/dimmir/PaginatorBundle/badge.svg?branch=master)](https://coveralls.io/github/dimmir/PaginatorBundle?branch=master) [![Dependency Status](https://www.versioneye.com/user/projects/5924edc085cd28003240f45f/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5924edc085cd28003240f45f)
 
 
 ## Installation:
