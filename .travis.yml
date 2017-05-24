@@ -1,0 +1,27 @@
+language: php
+
+php:
+  - 7.0
+  - 7.1
+
+matrix:
+  include:
+    - php: '7.0'
+    - php: '7.1'
+      env: COVERAGE=1
+
+before_install:
+    - if [ "$COVERAGE" != "1" ]; then phpenv config-rm xdebug.ini; fi;
+    - echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini;
+    - composer self-update
+    - if [[ $COVERAGE = 1 ]]; then mkdir -p build/logs build/cov; fi
+
+before_script:
+    - composer install --prefer-dist --no-interaction --no-scripts --no-progress
+
+script:
+    - if [ "$COVERAGE" != "1" ]; then vendor/bin/phpunit; fi;
+    - if [ "$COVERAGE" == "1" ]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; fi;
+
+after_script:
+    - if [ "$COVERAGE" == "1" ]; then php vendor/bin/coveralls -v fi;

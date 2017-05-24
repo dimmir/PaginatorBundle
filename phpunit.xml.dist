@@ -7,7 +7,7 @@
         </testsuite>
     </testsuites>
     <filter>
-        <whitelist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
             <directory>Paginator</directory>
             <directory>Pagination</directory>
             <directory>Factory</directory>

@@ -4,6 +4,9 @@ Flexible pagination bundle for Symfony 3.
 This bundle provides an easy way to add pagination support to the collection of your API.
 It easy used with FOSRestBundle
 
+[![Dependency Status](https://www.versioneye.com/user/projects/5924edc085cd28003240f45f/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5924edc085cd28003240f45f)
+
+
 ## Installation:
 
 You can install this bundle using composer:
