@@ -24,4 +24,4 @@ script:
     - if [ "$COVERAGE" == "1" ]; then vendor/bin/phpunit --coverage-clover build/logs/clover.xml; fi;
 
 after_script:
-    - if [ "$COVERAGE" == "1" ]; then php vendor/bin/coveralls -v fi;
+    - if [ "$COVERAGE" == "1" ]; then travis_retry php vendor/bin/coveralls -v fi;
